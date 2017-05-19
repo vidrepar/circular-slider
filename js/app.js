@@ -4,9 +4,7 @@ var app = {
 
         console.log('App initialized');
 
-    },
-    something:null
-
+    }
 };
 
 app.init();
