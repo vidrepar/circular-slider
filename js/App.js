@@ -1,25 +1,12 @@
 var App = {
 
-    create: function(values) {
+    create: function(values, array) {
         var instance = Object.create(this);
+        instance.arguments = array;
         Object.keys(values).forEach(function (key) {
             instance[key] = values[key];
         });
         return instance;
-    },
-    handleDown: function () {
-        
-    },
-    handleMove: function () {
-        
-    },
-    handleUp: function () {
-        
-    },
-    bindMouseEvents: function () {
-
-        document.body.addEventListener('mousemove', this.handleMove);
-
     }
 
 };
