@@ -22,9 +22,7 @@ var Handle = Circle.create({
         this.handleEl = document.createElement('div');
         this.handleEl['id'] = 'handle_'+i;
     },
-    designHandle: function (handleEl, offsetTop) {
-
-        console.log( offsetTop );
+    designHandle: function (handleEl) {
 
         handleEl.style.height = this.handleRadius+'px';
         handleEl.style.width = this.handleRadius+'px';
@@ -43,18 +41,18 @@ var Handle = Circle.create({
     },
     recalculateHandlePosition: function (e, offsetTop) {
 
-        console.log(offsetTop);
-
+        console.log( 'offsetTop: ', offsetTop );
+        
         var r = this.containerEl.getBoundingClientRect(),
             mX = e.clientX - r.left,
-            mY = e.clientY - r.top,
+            mY = e.clientY - offsetTop,
             dX = mX - this.circleX,
             dY = mY - this.circleY;
 
-        this.handleAngle = Math.atan2(dY, dX);
+        this.handleAngle = Math.atan2(dY + 10, dX);
 
-        this.setHandlePosition( this.circleX, this.circleY, this.circleRadius, this.handleRadius, this.handleAngle, offsetTop );
-        this.designHandle( this.handleEl, offsetTop ); // Should change just top and left values, refactor
+        this.setHandlePosition( this.circleX, this.circleY, this.circleRadius, this.handleRadius, this.handleAngle );
+        this.designHandle( this.handleEl ); // Should change just top and left values, refactor
 
     }
 

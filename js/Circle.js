@@ -26,9 +26,10 @@ var Circle = Container.create({
 
     },
     isInsideHitArea: function ( e, offsetTop ) {
-        
-        console.log( 'isInside', ( Math.sqrt( Math.pow( this.circleX - e.clientX, 2 ) + Math.pow( this.circleY + offsetTop - e.clientY, 2 ) ) < this.circleRadius + offsetTop && Math.sqrt( Math.pow( this.circleX - e.clientX, 2 ) + Math.pow( this.circleY + offsetTop - e.clientY, 2 ) ) + this.handleRadius > this.circleRadius + offsetTop
-        ) );
+
+        // This works
+        /*console.log( 'isInside', ( Math.sqrt( Math.pow( this.circleX - e.clientX, 2 ) + Math.pow( this.circleY + offsetTop - e.clientY, 2 ) ) < this.circleRadius && Math.sqrt( Math.pow( this.circleX - e.clientX, 2 ) + Math.pow( this.circleY + offsetTop - e.clientY, 2 ) ) + this.handleRadius > this.circleRadius
+        ) );*/
         
         return ( Math.sqrt( Math.pow( this.circleX - e.clientX, 2 ) + Math.pow( this.circleY + offsetTop - e.clientY, 2 ) ) < this.circleRadius && Math.sqrt( Math.pow( this.circleX - e.clientX, 2 ) + Math.pow( this.circleY + offsetTop - e.clientY, 2 ) ) + this.handleRadius > this.circleRadius
         )
