@@ -6,13 +6,18 @@ var Events = {
             case 'mousedown':
                 e.preventDefault();
 
-                for( var i=0;i<circles.length;i++ ){
+                for( var i=0;i<App.dialers.length;i++ ){
+                    
+                    for( var j=0;j<App.dialers[i].length;j++ ){
 
-                    if ( !circles[i].isInsideHitArea( e, circles[i].circleRadius ) ) continue;
-                    this.clickedHandle = circles[i];
-                    this.clickedHandle.recalculateHandlePosition(e);
-                    document.addEventListener('mousemove', this, false);
-                    document.addEventListener('mouseup', this, false);
+                        if ( !App.dialers[i][j].isInsideHitArea( e, App.dialers[i].offsetTop ) ) continue;
+
+                        this.clickedHandle = App.dialers[i][j];
+                        this.clickedHandle.recalculateHandlePosition(e, App.dialers[i].offsetTop);
+                        document.addEventListener('mousemove', this, false);
+                        document.addEventListener('mouseup', this, false);
+
+                    }
 
                 }
 

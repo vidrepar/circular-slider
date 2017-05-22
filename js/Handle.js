@@ -16,13 +16,16 @@ var Handle = Circle.create({
         this.setHandleRadius(  circleBorderThickness );
         this.setHandlePosition( circleX, circleY, circleRadius, handleRadius, handleAngle );
         this.designHandle(handleEl);
-        document.body.appendChild(this.handleEl); // Or document.body
+        this.containerEl.appendChild(this.handleEl);
     },
     createHandle: function (i) {
         this.handleEl = document.createElement('div');
         this.handleEl['id'] = 'handle_'+i;
     },
-    designHandle: function (handleEl) {
+    designHandle: function (handleEl, offsetTop) {
+
+        console.log( offsetTop );
+
         handleEl.style.height = this.handleRadius+'px';
         handleEl.style.width = this.handleRadius+'px';
         handleEl.style.position = 'absolute';
@@ -35,12 +38,12 @@ var Handle = Circle.create({
         return this.handleRadius = circleBorderThickness;
     },
     setHandlePosition: function ( circleX, circleY, circleRadius, handleRadius, handleAngle ) {
-
         this.handleX = circleX + (  circleRadius - this.handleRadius/2 ) * Math.cos( handleAngle );
         this.handleY = circleY + (  circleRadius - this.handleRadius/2 ) * Math.sin( handleAngle );
-
     },
-    recalculateHandlePosition: function (e) {
+    recalculateHandlePosition: function (e, offsetTop) {
+
+        console.log(offsetTop);
 
         var r = this.containerEl.getBoundingClientRect(),
             mX = e.clientX - r.left,
@@ -50,8 +53,8 @@ var Handle = Circle.create({
 
         this.handleAngle = Math.atan2(dY, dX);
 
-        this.setHandlePosition( this.circleX, this.circleY, this.circleRadius, this.handleRadius, this.handleAngle );
-        this.designHandle( this.handleEl ); // Should change just top and left values, refactor
+        this.setHandlePosition( this.circleX, this.circleY, this.circleRadius, this.handleRadius, this.handleAngle, offsetTop );
+        this.designHandle( this.handleEl, offsetTop ); // Should change just top and left values, refactor
 
     }
 

@@ -22,11 +22,15 @@ var Circle = Container.create({
         this.circleEl.style.boxSizing = 'border-box';
         this.circleEl.style.top = ( this.circleY - circleRadius )+'px';
         this.circleEl.style.left = ( this.circleX - circleRadius )+'px';
-        document.body.appendChild(this.circleEl);
+        this.containerEl.appendChild(this.circleEl);
 
     },
-    isInsideHitArea: function ( e ) {
-        return ( Math.sqrt( Math.pow( this.circleX - e.clientX, 2 ) + Math.pow( this.circleY - e.clientY, 2 ) ) < this.circleRadius && Math.sqrt( Math.pow( this.circleX - e.clientX, 2 ) + Math.pow( this.circleY - e.clientY, 2 ) ) + this.handleRadius > this.circleRadius
+    isInsideHitArea: function ( e, offsetTop ) {
+        
+        console.log( 'isInside', ( Math.sqrt( Math.pow( this.circleX - e.clientX, 2 ) + Math.pow( this.circleY + offsetTop - e.clientY, 2 ) ) < this.circleRadius + offsetTop && Math.sqrt( Math.pow( this.circleX - e.clientX, 2 ) + Math.pow( this.circleY + offsetTop - e.clientY, 2 ) ) + this.handleRadius > this.circleRadius + offsetTop
+        ) );
+        
+        return ( Math.sqrt( Math.pow( this.circleX - e.clientX, 2 ) + Math.pow( this.circleY + offsetTop - e.clientY, 2 ) ) < this.circleRadius && Math.sqrt( Math.pow( this.circleX - e.clientX, 2 ) + Math.pow( this.circleY + offsetTop - e.clientY, 2 ) ) + this.handleRadius > this.circleRadius
         )
 
     }

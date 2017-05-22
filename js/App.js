@@ -1,5 +1,6 @@
 var App = {
 
+    dialers: [],
     create: function(values, array) {
         var instance = Object.create(this);
         instance.arguments = array;
