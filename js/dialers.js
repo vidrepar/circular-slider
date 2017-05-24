@@ -10,18 +10,24 @@
 
 Dialer = {
 
-    containerNames:[],
     compose: function ( min, max, step, radius, categoriesNum, containerName ) {
 
-        var circles = [];
+        var container,
+            circles = [],
+            events;
 
-        this.containerNames.push(containerName);
-
+        // Refactor; Don't work with Container/Circle/Handle objects
         Container.renderContainer(containerName);
+        container = Object.assign({}, Container, { containerEl: document.getElementById( containerName ) });
+
+        var dialer = {
+            container: container,
+            circles: circles
+        };
 
         for ( var i=0;i<categoriesNum;i++ ) {
 
-            circles.push(Circle.create(Handle));
+            circles.push(Object.assign( Object.create(container) , {}, Circle, Handle ));
 
             circles[i].circleRadius = radius+i*(circles[i].circleBorderThickness+2);
             circles[i].renderCircle( circles[i].circleRadius );
@@ -40,17 +46,15 @@ Dialer = {
 
         }
 
-        App.dialers.push(circles);
+        events = Object.assign(Object.create(dialer), Events);
+        events.bindEvents();
 
-        for (var k = 0; k < App.dialers.length; k++) {
-            App.dialers[k].offsetTop = document.getElementById(this.containerNames[k]).offsetTop;
-            App.dialers[k].containerEl = document.getElementById(this.containerNames[k]);
-        }
-
+        return dialer;
+        
     }
 };
 
-Dialer.compose(0,0,0,60,4, 'bar');
-Dialer.compose(0,0,0,60,3, 'foo');
+var bazDialer = Dialer.compose(0,0,0,60,4, 'bar');
 
-console.log( 'App.dialers: ', App.dialers );
+
+console.log( 'bazDialer: ', bazDialer );

@@ -40,8 +40,6 @@ var Handle = Circle.create({
         this.handleY = circleY + (  circleRadius - this.handleRadius/2 ) * Math.sin( handleAngle );
     },
     recalculateHandlePosition: function (e, offsetTop) {
-
-        console.log( 'offsetTop: ', offsetTop );
         
         var r = this.containerEl.getBoundingClientRect(),
             mX = e.clientX - r.left,

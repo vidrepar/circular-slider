@@ -1,13 +1,23 @@
 var Events = {
     clickedHandle: null,
-    clickedOffsetTop: null,
     handleEvent: function (e) {
         
         switch (e.type) {
             case 'mousedown':
                 e.preventDefault();
 
-                for( var i=0;i<App.dialers.length;i++ ){
+                console.log( 'foobarbaz' );
+
+                document.addEventListener('mousemove', this, false);
+                document.addEventListener('mouseup', this, false);
+
+                console.log( 'this: ', this.circles );
+                
+                /*for( var i=0;i<this.circles.length;i++ ){
+
+                }*/
+
+                /*for( var i=0;i<App.dialers.length;i++ ){
 
                     for( var j=0;j<App.dialers[i].length;j++ ){
 
@@ -15,28 +25,26 @@ var Events = {
                         this.clickedOffsetTop = App.dialers[i].offsetTop;
                         this.clickedHandle = App.dialers[i][j];
                         this.clickedHandle.recalculateHandlePosition(e, this.clickedOffsetTop);
-                        document.addEventListener('mousemove', this, false);
-                        document.addEventListener('mouseup', this, false);
 
                     }
 
-                }
+                }*/
 
                 break;
             case 'mousemove':
                 e.preventDefault();
-                this.clickedHandle.recalculateHandlePosition(e, this.clickedOffsetTop);
+                console.log( this.clickedHandle );
+                this.clickedHandle.recalculateHandlePosition(e);
                 break;
             case 'mouseup':
                 e.preventDefault();
                 document.removeEventListener('mousemove', this, false);
                 document.removeEventListener('mouseup', this, false);
+                this.clickedHandle = null;
                 break;
         }
     },
     bindEvents: function () {
-        document.addEventListener('mousedown', this, false);
+        document.getElementById( 'bar' ).addEventListener('mousedown', this, false);
     }
 };
-
-Events.bindEvents();
