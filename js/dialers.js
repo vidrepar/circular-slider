@@ -10,14 +10,14 @@
 
 Dialer = {
 
-    compose: function ( min, max, step, radius, categoriesNum, containerName ) {
+    compose: function ( min, max, step, radius, categoriesNum, containerName, color ) {
 
         var container,
             circles = [],
             events;
 
         container = Object.assign({}, Container);
-        container.renderContainer(containerName);
+        container.renderContainer(containerName, color);
 
         var dialer = {
             container: container,
@@ -26,24 +26,37 @@ Dialer = {
 
         for ( var i=0;i<categoriesNum;i++ ) {
 
-            circles.push(Object.assign( Object.create(container) , {}, Circle, Handle ));
+            circles.push(Object.assign( Object.create(container), Circle, Handle ));
 
             circles[i].circleRadius = radius+i*(circles[i].circleBorderThickness+2);
             circles[i].renderCircle( circles[i].circleRadius );
-            circles[i].createHandle(i);
-            circles[i].renderHandle(
-                circles[i].circleX,
-                circles[i].circleY,
-                circles[i].circleRadius,
-                circles[i].handleRadius,
-                circles[i].handleAngle,
-                circles[i].circleBorderThickness,
-                i,
-                circles[i].handleEl
-            );
             circles[i].index = i;
 
+            if ( circles[categoriesNum-1] )
+                container.containerEl.style.height = ( circles[categoriesNum-1].circleRadius*2 + circles[i].circleBorderThickness*2)+'px',
+                container.containerHeight = circles[categoriesNum-1].circleRadius*2 + circles[i].circleBorderThickness*2 ;
+
         }
+
+        for ( var j=0;j<circles.length;j++ ) {
+            circles[j].circleEl.style.top = ( container.containerHeight/2 - circles[j].circleRadius ) + 'px';
+            circles[j].createHandle(j);
+            
+            console.log( 'circles[j].circleY,: ', circles[j].circleY );
+            console.log( 'circles[j].circleCenterY,: ', circles[j].circleCenterY );
+
+            circles[j].renderHandle(
+                circles[j].circleX,
+                circles[j].circleY,
+                circles[j].circleRadius,
+                circles[j].handleRadius,
+                circles[j].handleAngle,
+                circles[j].circleBorderThickness,
+                j,
+                circles[j].handleEl
+            );
+        }
+
 
         events = Object.assign(Object.create(dialer), Events);
         events.bindEvents();
@@ -53,7 +66,7 @@ Dialer = {
     }
 };
 
-var bazDialer = Dialer.compose(0,0,0,60,2, 'baz');
-var barDialer = Dialer.compose(0,0,0,60,4, 'bar');
-var fooDialer = Dialer.compose(0,0,0,80,5, 'foo');
-var anotherDialer = Dialer.compose(0,0,0,40,3, 'another');
+var bazDialer = Dialer.compose(0,0,0,60,2, 'baz', 'lightblue');
+var barDialer = Dialer.compose(0,0,0,60,4, 'bar', 'aquamarine');
+var fooDialer = Dialer.compose(0,0,0,80,5, 'foo', 'lightgreen');
+var anotherDialer = Dialer.compose(0,0,0,40,3, 'another', 'lightyellow');

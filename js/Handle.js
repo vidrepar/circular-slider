@@ -17,6 +17,7 @@ var Handle = Circle.create({
         this.setHandlePosition( circleX, circleY, circleRadius, handleRadius, handleAngle );
         this.designHandle(handleEl);
         this.containerEl.appendChild(this.handleEl);
+        
     },
     createHandle: function (i) {
         this.handleEl = document.createElement('div');
@@ -37,16 +38,19 @@ var Handle = Circle.create({
         return this.handleRadius = circleBorderThickness;
     },
     setHandlePosition: function ( circleX, circleY, circleRadius, handleRadius, handleAngle ) {
-        this.handleX = circleX + (  circleRadius - this.handleRadius/2 ) * Math.cos( handleAngle );
-        this.handleY = circleY + (  circleRadius - this.handleRadius/2 ) * Math.sin( handleAngle );
+        this.handleX = this.circleCenterX + (  circleRadius - this.handleRadius/2 ) * Math.cos( handleAngle );
+        this.handleY = this.circleCenterY + (  circleRadius - this.handleRadius/2 ) * Math.sin( handleAngle );
     },
     recalculateHandlePosition: function (e) {
+
+        // console.log( 'this.circleCenterY: ', this.circleCenterY );
+        // console.log( 'e.pageY: ', e.pageY );
 
         var r = this.containerEl.getBoundingClientRect(),
             mX = e.clientX - r.left,
             mY = e.clientY - r.top,
-            dX = mX - this.circleX,
-            dY = mY - this.circleY;
+            dX = mX - this.circleCenterX,
+            dY = mY - this.circleCenterY;
 
         this.handleAngle = Math.atan2(dY + 10, dX);
 
