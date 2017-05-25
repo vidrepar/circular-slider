@@ -55,11 +55,16 @@ Dialer = {
                 j,
                 circles[j].handleEl
             );
+
+
         }
+
 
         events = Object.assign(Object.create(dialer), Events);
         events.bindEvents();
 
+        console.log( 'events: ', events );
+        
         return dialer;
         
     }

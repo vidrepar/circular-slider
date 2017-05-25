@@ -7,7 +7,7 @@
 var Circle = Container.create({
 
     circleEl: null,
-    circleX: 70,
+    circleX: 50,
     circleY: 200,
     circleCenterX: null,
     circleCenterY: null,
@@ -42,8 +42,8 @@ var Circle = Container.create({
         this.circleCenterY = this.getCircleCenter(this.circleEl).y + this.circleRadius;
 
         // This works
-        console.log( 'isInside', ( Math.sqrt( Math.pow( this.circleCenterX - e.pageX, 2 ) + Math.pow( this.circleCenterY - e.pageY, 2 ) ) < this.circleRadius && Math.sqrt( Math.pow( this.circleCenterX - e.pageX, 2 ) + Math.pow( this.circleCenterY - e.pageY, 2 ) ) + this.handleRadius > this.circleRadius
-        ) );
+        /*console.log( 'isInside', ( Math.sqrt( Math.pow( this.circleCenterX - e.pageX, 2 ) + Math.pow( this.circleCenterY - e.pageY, 2 ) ) < this.circleRadius && Math.sqrt( Math.pow( this.circleCenterX - e.pageX, 2 ) + Math.pow( this.circleCenterY - e.pageY, 2 ) ) + this.handleRadius > this.circleRadius
+        ) );*/
         
         return ( Math.sqrt( Math.pow( this.circleCenterX - e.pageX, 2 ) + Math.pow( this.circleCenterY - e.pageY, 2 ) ) < this.circleRadius && Math.sqrt( Math.pow( this.circleCenterX - e.pageX, 2 ) + Math.pow( this.circleCenterY - e.pageY, 2 ) ) + this.handleRadius > this.circleRadius
         )

@@ -1,4 +1,10 @@
 body {
     margin: 0;
     position: relative;
+    overflow-y: scroll;
+}
+
+.data-container, .dialer-container {
+    height: inherit;
+    width: 50%;
 }

@@ -2,13 +2,9 @@ var Events = {
     draggedHandle: null,
     handleEvent: function (e) {
         
-        console.log( 'e.type: ', e.type );
-        
         switch (e.type) {
             case 'mousedown':
                 e.preventDefault();
-                
-                console.log( 'this: ', this );
 
                 for( var i=0;i<this.circles.length;i++ ){
 
