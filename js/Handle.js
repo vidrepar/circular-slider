@@ -39,22 +39,19 @@ var Handle = Circle.create({
     },
     setHandlePosition: function ( circleX, circleY, circleRadius, handleRadius, handleAngle ) {
         this.handleX = this.circleCenterX + (  circleRadius - this.handleRadius/2 ) * Math.cos( handleAngle );
-        this.handleY = this.circleCenterY + (  circleRadius - this.handleRadius/2 ) * Math.sin( handleAngle );
+        this.handleY = circleY + (  circleRadius - this.handleRadius/2 ) * Math.sin( handleAngle );
     },
     recalculateHandlePosition: function (e) {
-
-        // console.log( 'this.circleCenterY: ', this.circleCenterY );
-        // console.log( 'e.pageY: ', e.pageY );
 
         var r = this.containerEl.getBoundingClientRect(),
             mX = e.clientX - r.left,
             mY = e.clientY - r.top,
             dX = mX - this.circleCenterX,
-            dY = mY - this.circleCenterY;
+            dY = mY - this.circleY;
 
-        this.handleAngle = Math.atan2(dY + 10, dX);
+        this.handleAngle = Math.atan2(dY, dX);
 
-        this.setHandlePosition( this.circleX, this.circleY, this.circleRadius, this.handleRadius, this.handleAngle );
+        this.setHandlePosition( this.circleCenterX, this.circleY, this.circleRadius, this.handleRadius, this.handleAngle );
         this.designHandle( this.handleEl ); // Should change just top and left values, refactor
 
     }

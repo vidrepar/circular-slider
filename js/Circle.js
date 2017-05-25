@@ -7,7 +7,7 @@
 var Circle = Container.create({
 
     circleEl: null,
-    circleX: 50,
+    circleX: 70,
     circleY: 200,
     circleCenterX: null,
     circleCenterY: null,
@@ -22,7 +22,6 @@ var Circle = Container.create({
         this.circleEl.style.border = this.circleBorderThickness+'px solid blue';
         this.circleEl.style.boxSizing = 'border-box';
         this.circleEl.style.top = ( this.circleCenterY - circleRadius )+'px';
-        //this.circleEl.style.left = ( this.circleX - circleRadius )+'px';
         this.circleEl.style.left = 'calc('+ this.circleX +'% - '+ circleRadius +'px)';
         this.containerEl.appendChild(this.circleEl);
 

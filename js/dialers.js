@@ -39,12 +39,12 @@ Dialer = {
         }
 
         for ( var j=0;j<circles.length;j++ ) {
-            circles[j].circleEl.style.top = ( container.containerHeight/2 - circles[j].circleRadius ) + 'px';
-            circles[j].createHandle(j);
-            
-            console.log( 'circles[j].circleY,: ', circles[j].circleY );
-            console.log( 'circles[j].circleCenterY,: ', circles[j].circleCenterY );
 
+            circles[j].circleY = container.containerHeight/2;
+            circles[j].circleX = circles[j].circleCenterX;
+            circles[j].circleEl.style.top = ( container.containerHeight/2 - circles[j].circleRadius ) + 'px';
+
+            circles[j].createHandle(j);
             circles[j].renderHandle(
                 circles[j].circleX,
                 circles[j].circleY,
@@ -56,7 +56,6 @@ Dialer = {
                 circles[j].handleEl
             );
         }
-
 
         events = Object.assign(Object.create(dialer), Events);
         events.bindEvents();
