@@ -18,8 +18,17 @@
     "gulp-jshint": "^2.0.1",
     "gulp-serve": "^1.4.0",
     "gulp-uglify": "^1.5.4",
+    "jsdom-quokka-plugin": "^1.0.4",
     "jshint": "^2.9.2"
   },
+  "quokka": {
+    "plugins": [
+      "jsdom-quokka-plugin"
+    ],
+    "jsdom": {
+      "html": "<div id=\"global\"></div>",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36"
+    },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

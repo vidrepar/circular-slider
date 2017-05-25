@@ -1,7 +1,4 @@
-/*
-* App
-*   Container
-* */
+
 
 var Container = App.create({
 

@@ -1,12 +1,3 @@
-/*
- * App
- *   Container
- *      Circle
- *          Handle
- *          Handle
- *          Handle
- * */
-
 
 Dialer = {
 
