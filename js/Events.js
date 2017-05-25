@@ -1,50 +1,34 @@
 var Events = {
-    clickedHandle: null,
+    draggedHandle: null,
     handleEvent: function (e) {
         
         switch (e.type) {
             case 'mousedown':
                 e.preventDefault();
 
-                console.log( 'foobarbaz' );
+                for( var i=0;i<this.circles.length;i++ ){
 
-                document.addEventListener('mousemove', this, false);
-                document.addEventListener('mouseup', this, false);
-
-                console.log( 'this: ', this.circles );
-                
-                /*for( var i=0;i<this.circles.length;i++ ){
-
-                }*/
-
-                /*for( var i=0;i<App.dialers.length;i++ ){
-
-                    for( var j=0;j<App.dialers[i].length;j++ ){
-
-                        if ( !App.dialers[i][j].isInsideHitArea( e, App.dialers[i].offsetTop ) ) continue;
-                        this.clickedOffsetTop = App.dialers[i].offsetTop;
-                        this.clickedHandle = App.dialers[i][j];
-                        this.clickedHandle.recalculateHandlePosition(e, this.clickedOffsetTop);
-
-                    }
-
-                }*/
+                    if ( !this.circles[i].isInsideHitArea(e) ) continue;
+                    this.draggedHandle = this.circles[i];
+                    this.draggedHandle.recalculateHandlePosition(e);
+                    this.container.containerEl.addEventListener('mousemove', this, false);
+                    this.container.containerEl.addEventListener('mouseup', this, false);
+                }
 
                 break;
             case 'mousemove':
                 e.preventDefault();
-                console.log( this.clickedHandle );
-                this.clickedHandle.recalculateHandlePosition(e);
+                this.draggedHandle.recalculateHandlePosition(e);
                 break;
             case 'mouseup':
                 e.preventDefault();
-                document.removeEventListener('mousemove', this, false);
-                document.removeEventListener('mouseup', this, false);
-                this.clickedHandle = null;
+                this.container.containerEl.removeEventListener('mousemove', this, false);
+                this.container.containerEl.removeEventListener('mouseup', this, false);
+                this.draggedHandle = null;
                 break;
         }
     },
     bindEvents: function () {
-        document.getElementById( 'bar' ).addEventListener('mousedown', this, false);
+        this.container.containerEl.addEventListener('mousedown', this, false);
     }
 };

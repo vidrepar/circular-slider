@@ -31,6 +31,7 @@ var Handle = Circle.create({
         handleEl.style.backgroundColor = 'red';
         handleEl.style.top = ( this.handleY - this.handleRadius/2 )+'px';
         handleEl.style.left = ( this.handleX - this.handleRadius/2 ) + 'px';
+        handleEl.style.zIndex = 1;
     },
     setHandleRadius: function ( circleBorderThickness ) {
         return this.handleRadius = circleBorderThickness;
@@ -39,11 +40,11 @@ var Handle = Circle.create({
         this.handleX = circleX + (  circleRadius - this.handleRadius/2 ) * Math.cos( handleAngle );
         this.handleY = circleY + (  circleRadius - this.handleRadius/2 ) * Math.sin( handleAngle );
     },
-    recalculateHandlePosition: function (e, offsetTop) {
-        
+    recalculateHandlePosition: function (e) {
+
         var r = this.containerEl.getBoundingClientRect(),
             mX = e.clientX - r.left,
-            mY = e.clientY - offsetTop,
+            mY = e.clientY - r.top,
             dX = mX - this.circleX,
             dY = mY - this.circleY;
 

@@ -10,7 +10,6 @@ var Container = App.create({
     containerHeight: 400,
     containerEl: null,
     containerName: null,
-    containerOffsetTop: null,
     renderContainer: function (containerName) {
         this.createContainer(containerName);
     },

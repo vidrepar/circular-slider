@@ -16,9 +16,8 @@ Dialer = {
             circles = [],
             events;
 
-        // Refactor; Don't work with Container/Circle/Handle objects
-        Container.renderContainer(containerName);
-        container = Object.assign({}, Container, { containerEl: document.getElementById( containerName ) });
+        container = Object.assign({}, Container);
+        container.renderContainer(containerName);
 
         var dialer = {
             container: container,
@@ -54,7 +53,7 @@ Dialer = {
     }
 };
 
-var bazDialer = Dialer.compose(0,0,0,60,4, 'bar');
-
-
-console.log( 'bazDialer: ', bazDialer );
+var bazDialer = Dialer.compose(0,0,0,60,2, 'baz');
+var barDialer = Dialer.compose(0,0,0,60,4, 'bar');
+var fooDialer = Dialer.compose(0,0,0,80,5, 'foo');
+var anotherDialer = Dialer.compose(0,0,0,40,3, 'another');
