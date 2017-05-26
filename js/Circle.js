@@ -44,8 +44,9 @@ var Circle = Container.create({
         /*console.log( 'isInside', ( Math.sqrt( Math.pow( circleX - e.pageX, 2 ) + Math.pow( circleY - e.pageY, 2 ) ) < this.circleRadius && Math.sqrt( Math.pow( circleX - e.pageX, 2 ) + Math.pow( circleY - e.pageY, 2 ) ) + this.handleRadius > this.circleRadius
         ) );*/
         
-        return ( Math.sqrt( Math.pow( this.circleCenterX - e.pageX, 2 ) + Math.pow( this.circleCenterY - e.pageY, 2 ) ) < this.circleRadius && Math.sqrt( Math.pow( this.circleCenterX - e.pageX, 2 ) + Math.pow( this.circleCenterY - e.pageY, 2 ) ) + this.handleRadius > this.circleRadius
-        )
+        return  Math.sqrt( Math.pow( this.circleCenterX - e.pageX, 2 ) + Math.pow( this.circleCenterY - e.pageY, 2 ) ) < this.circleRadius &&
+                Math.sqrt( Math.pow( this.circleCenterX - e.pageX, 2 ) + Math.pow( this.circleCenterY - e.pageY, 2 ) ) + this.handleRadius > this.circleRadius;
+
 
     }
 

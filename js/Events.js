@@ -1,7 +1,7 @@
 var Events = {
     draggedHandle: null,
     handleEvent: function (e) {
-        
+
         switch (e.type) {
             case 'mousedown':
                 e.preventDefault();
@@ -12,8 +12,14 @@ var Events = {
                     this.draggedHandle = this.circles[i];
                     this.draggedHandle.recalculateHandlePosition(
                         e,
-                        this.circles[i].getCircleCenter(this.circles[i].circleEl).x + this.circles[i].circleRadius,
-                        this.circles[i].getCircleCenter(this.circles[i].circleEl).y + this.circles[i].circleRadius - this.draggedHandle.containerEl.getBoundingClientRect().top - window.pageYOffset
+                        this.draggedHandle.getCircleCenter(this.draggedHandle.circleEl).x + this.draggedHandle.circleRadius,
+                            this.draggedHandle.getCircleCenter( this.draggedHandle.circleEl).y +
+                            this.draggedHandle.circleRadius -
+                            this.draggedHandle.containerEl.getBoundingClientRect().top -
+                            window.pageYOffset,
+                        this.draggedHandle.setHandleRadius(this.draggedHandle.circleBorderThickness),
+                        this.draggedHandle.handleEl,
+                        this.draggedHandle.circleRadius
                     );
                     this.container.containerEl.addEventListener('mousemove', this, false);
                     this.container.containerEl.addEventListener('mouseup', this, false);
@@ -25,8 +31,14 @@ var Events = {
                 e.preventDefault();
                 this.draggedHandle.recalculateHandlePosition(
                     e,
-                    this.draggedHandle.getCircleCenter(this.draggedHandle.circleEl).x + this.draggedHandle.circleRadius,
-                    this.draggedHandle.getCircleCenter(this.draggedHandle.circleEl).y + this.draggedHandle.circleRadius - this.draggedHandle.containerEl.getBoundingClientRect().top - window.pageYOffset
+                    this.draggedHandle.getCircleCenter( this.draggedHandle.circleEl).x + this.draggedHandle.circleRadius,
+                        this.draggedHandle.getCircleCenter( this.draggedHandle.circleEl).y +
+                        this.draggedHandle.circleRadius -
+                        this.draggedHandle.containerEl.getBoundingClientRect().top -
+                        window.pageYOffset,
+                    this.draggedHandle.setHandleRadius(this.draggedHandle.circleBorderThickness),
+                    this.draggedHandle.handleEl,
+                    this.draggedHandle.circleRadius
                 );
                 break;
             case 'mouseup':
@@ -40,23 +52,17 @@ var Events = {
 
                 for( var j=0;j<this.circles.length;j++ ){
 
-                    // console.log(this.circles[0].containerEl.getBoundingClientRect().width/2);
-
-                    this.circles[j].setHandlePosition(
-                        this.circles[j].containerEl.getBoundingClientRect().width/2,
-                        this.circles[j].circleY,
-                        this.circles[j].circleRadius,
-                        this.circles[j].handleRadius,
-                        this.circles[j].handleAngle,
-                        this.circles[j].circleBorderThickness,
-                        j,
-                        this.circles[j].handleEl
-                    );
                     this.circles[j].positionHandle(
                         this.circles[j].handleEl,
-                        this.circles[j].circleBorderThickness
+                        this.circles[j].setHandlePosition(
+                            this.circles[j].containerEl.getBoundingClientRect().width/2,
+                            this.circles[j].circleY,
+                            this.circles[j].circleRadius,
+                            this.circles[j].setHandleRadius(this.circles[j].circleBorderThickness),
+                            this.circles[j].handleAngle
+                        ),
+                        this.circles[j].setHandleRadius(this.circles[j].circleBorderThickness)
                     );
-
                 }
         }
     },

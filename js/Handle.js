@@ -1,54 +1,46 @@
-/*
- * App
- *   Container
- *      Circle
- *          Handle
- * */
 
-var Handle = Circle.create({
+var Handle = {
 
-    handleEl: null,
-    handleY: null,
-    handleRadius: null,
-    handleAngle: Math.PI*2, // Math.PI
-    renderHandle: function ( circleX, circleY, circleRadius, handleRadius, handleAngle, circleBorderThickness, i, handleEl ) {
-        this.setHandleRadius(  circleBorderThickness );
-        //this.setHandlePosition( circleX, circleY, circleRadius, handleRadius, handleAngle );
-        this.designHandle( handleEl, this.setHandlePosition( circleX, circleY, circleRadius, handleRadius, handleAngle ));
-        this.containerEl.appendChild( handleEl );
-        
+    renderHandle: function ( circleX, circleY, circleRadius, handleRadius, handleAngle, circleBorderThickness, i, handleEl, containerEl ) {
+
+        this.designHandle(
+            handleEl,
+            this.setHandlePosition( circleX, circleY, circleRadius, handleRadius, handleAngle ),
+            handleRadius
+        );
+        containerEl.appendChild( handleEl );
+
     },
-    createHandle: function (i) {
-        this.handleEl = document.createElement('div');
-        this.handleEl['id'] = 'handle_'+i;
+    createHandle: function ( el, i, containerName ) {
+        el['id'] = 'handle_'+containerName+'_'+i;
+        return el;
     },
-    designHandle: function ( handleEl, handlePosition ) {
+    designHandle: function ( handleEl, handlePosition, handleRadius ) {
 
-        handleEl.style.height = this.handleRadius+'px';
-        handleEl.style.width = this.handleRadius+'px';
+        handleEl.style.height = handleRadius+'px';
+        handleEl.style.width = handleRadius+'px';
         handleEl.style.position = 'absolute';
         handleEl.style.borderRadius = '50%';
         handleEl.style.backgroundColor = 'red';
         handleEl.style.zIndex = 1;
-        this.positionHandle( handleEl, handlePosition );
+        this.positionHandle( handleEl, handlePosition, handleRadius );
     },
-    positionHandle: function ( handleEl, handlePosition ) {
-        handleEl.style.top = ( handlePosition.y - this.handleRadius/2 )+'px';
-        handleEl.style.left = ( this.handleX - this.handleRadius/2 ) + 'px';
+    positionHandle: function ( handleEl, handlePosition, handleRadius ) {
+        handleEl.style.top = ( handlePosition.y - handleRadius/2 )+'px';
+        handleEl.style.left = ( handlePosition.x - handleRadius/2 ) + 'px';
     },
     setHandleRadius: function ( circleBorderThickness ) {
-        this.handleRadius = circleBorderThickness;
         return circleBorderThickness;
     },
     setHandlePosition: function ( circleX, circleY, circleRadius, handleRadius, handleAngle ) {
-        this.handleX = circleX + (  circleRadius - this.handleRadius/2 ) * Math.cos( handleAngle );
-        this.handleY = circleY + (  circleRadius - this.handleRadius/2 ) * Math.sin( handleAngle );
         return {
-            x: circleY + (  circleRadius - this.handleRadius/2 ) * Math.cos( handleAngle ),
-            y: circleY + (  circleRadius - this.handleRadius/2 ) * Math.sin( handleAngle )
+            x: circleX + (  circleRadius - handleRadius/2 ) * Math.cos( handleAngle ),
+            y: circleY + (  circleRadius - handleRadius/2 ) * Math.sin( handleAngle )
         }
     },
-    recalculateHandlePosition: function (e, circleX, circleY) {
+    setHandleAngle: function ( e, circleX, circleY ) {
+
+        if ( !e ) return Math.PI*2;
 
         var r = this.containerEl.getBoundingClientRect(),
             mX = e.clientX - r.left,
@@ -56,18 +48,23 @@ var Handle = Circle.create({
             dX = mX - circleX,
             dY = mY - circleY;
 
-        this.handleAngle = Math.atan2(dY, dX);
+        this.handleAngle = Math.atan2(dY, dX); // For dynamic positioning during resizing; refactor in the future;
+        return Math.atan2(dY, dX);
+    },
+    recalculateHandlePosition: function ( e, circleX, circleY, handleRadius, handleEl, circleRadius ) {
+
         this.designHandle(
-            this.handleEl,
+            handleEl,
             this.setHandlePosition(
                 circleX,
                 circleY,
-                this.circleRadius,
-                this.handleRadius,
-                this.handleAngle
-            )
+                circleRadius,
+                handleRadius,
+                this.setHandleAngle( e, circleX, circleY )
+            ),
+            handleRadius
         );
 
     }
 
-});
+};
