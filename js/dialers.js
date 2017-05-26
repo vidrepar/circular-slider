@@ -8,8 +8,9 @@ Dialer = {
             events;
 
         container = Object.assign({}, Container);
-        container.renderContainer( containerName, color );
-
+        container.containerEl = container.createContainer(document.createElement('div'), containerName, color);
+        container.renderContainer( container.containerEl, containerName, color );
+        
         var dialer = {
             container: container,
             circles: circles
@@ -27,12 +28,11 @@ Dialer = {
             circles[i].handleRadius = circles[i].setHandleRadius(circles[i].circleBorderThickness);
             circles[i].handleAngle = circles[i].setHandleAngle();
             circles[i].circleRadius = radius+i*(circles[i].circleBorderThickness+2);
-
-            circles[i].renderCircle( circles[i].circleRadius );
+            circles[i].renderCircle( circles[i].circleRadius, circles[i].containerEl );
 
             if ( circles[categoriesNum-1] )
-                container.containerEl.style.height = ( circles[categoriesNum-1].circleRadius*2 + circles[i].circleBorderThickness*2)+'px',
-                container.containerHeight = circles[categoriesNum-1].circleRadius*2 + circles[i].circleBorderThickness*2 ;
+                container.containerHeight = circles[categoriesNum-1].circleRadius*2 + circles[i].circleBorderThickness*2,
+                container.containerEl.style.height = container.containerHeight+'px';
         }
 
         for ( var j=0;j<circles.length;j++ ) {

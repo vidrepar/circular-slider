@@ -11,7 +11,7 @@ var Circle = Container.create({
     circleCenterX: null,
     circleCenterY: null,
     circleBorderThickness: 30,
-    renderCircle: function ( circleRadius ) {
+    renderCircle: function ( circleRadius, containerEl ) {
 
         this.circleEl = document.createElement('div');
         this.circleEl.style.height = circleRadius*2 + 'px';
@@ -22,7 +22,7 @@ var Circle = Container.create({
         this.circleEl.style.boxSizing = 'border-box';
         this.circleEl.style.top = ( this.circleCenterY - circleRadius )+'px';
         this.circleEl.style.left = 'calc('+ this.circleX +'% - '+ circleRadius +'px)';
-        this.containerEl.appendChild(this.circleEl);
+        containerEl.appendChild(this.circleEl);
 
         this.circleCenterX = this.getCircleCenter(this.circleEl).x + this.circleRadius;
         this.circleCenterY = this.getCircleCenter(this.circleEl).y + this.circleRadius;

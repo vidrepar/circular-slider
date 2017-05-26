@@ -23,7 +23,6 @@ var Events = {
                     );
                     this.container.containerEl.addEventListener('mousemove', this, false);
                     this.container.containerEl.addEventListener('mouseup', this, false);
-
                 }
 
                 break;

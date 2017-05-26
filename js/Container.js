@@ -2,37 +2,31 @@
 
 var Container = App.create({
 
-    containerWidth: null,
-    containerHeight: null,
-    containerEl: null,
-    containerName: null,
-    renderContainer: function ( containerName, color ) {
-        this.createContainer( containerName, color );
-        this.createDialerContainer();
-        this.createDataContainer();
+    renderContainer: function ( containerEl ) {
+        this.createMainContainer( containerEl, this.createDataContainer() );
     },
-    createContainer: function ( containerName, color ) {
+    createContainer: function ( containerEl, containerName, color ) {
 
-        this.containerName = containerName;
+        containerEl.style.position = 'relative';
+        containerEl.style.backgroundColor = color;
+        containerEl['id'] = containerName;
+        containerEl['className'] = 'dialer-container';
+        document.body.appendChild( containerEl );
+        return containerEl;
 
-        this.containerEl = document.createElement('div');
-        this.containerEl.style.height = this.containerHeight + 'px';
-        this.containerEl.style.position = 'relative';
-        this.containerEl.style.backgroundColor = color;
-        this.containerEl['id'] = containerName;
-        document.body.appendChild( this.containerEl );
+    },
+    createMainContainer: function ( containerEl, dataContainer ) {
+        var mainContainer = document.createElement('div');
+        mainContainer['className'] = 'main-container';
+        document.body.insertBefore( mainContainer, document.body.childNodes[0] );
+        mainContainer.appendChild( containerEl );
+        mainContainer.appendChild( dataContainer );
 
     },
     createDataContainer: function () {
-        this.dataContainerEl = document.createElement('div');
-        this.dataContainerEl['className'] = 'data-container';
-        document.body.insertBefore( this.dataContainerEl, document.body.childNodes[0] );
-    },
-    createDialerContainer: function () {
-        this.dialerContainerEl = document.createElement('div');
-        this.dialerContainerEl['className'] = 'dialer-container';
-        document.body.insertBefore( this.dialerContainerEl, document.body.childNodes[0] );
-        this.dialerContainerEl.appendChild(this.containerEl);
+        var dataContainer = document.createElement('div');
+        dataContainer['className'] = 'data-container';
+        return dataContainer;
     }
 
 });
