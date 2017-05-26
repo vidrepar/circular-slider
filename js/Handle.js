@@ -22,7 +22,7 @@ var Handle = {
         handleEl.style.position = 'absolute';
         handleEl.style.borderRadius = '50%';
         handleEl.style.backgroundColor = 'red';
-        handleEl.style.zIndex = 1;
+        handleEl.style.zIndex = 2;
         this.positionHandle( handleEl, handlePosition, handleRadius );
     },
     positionHandle: function ( handleEl, handlePosition, handleRadius ) {
@@ -40,7 +40,7 @@ var Handle = {
     },
     setHandleAngle: function ( e, circleX, circleY ) {
 
-        if ( !e ) return Math.PI*2;
+        if ( !e ) return Math.PI*1.5;
 
         var r = this.containerEl.getBoundingClientRect(),
             mX = e.clientX - r.left,

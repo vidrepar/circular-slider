@@ -8,7 +8,7 @@ var Events = {
                 
                 for( var i=0;i<this.circles.length;i++ ){
 
-                    if ( !this.circles[i].isInsideHitArea(e) ) continue;
+                    if ( !this.circles[i].isInsideHitArea( e, this.circles[i].circleEl, this.circles[i].circleRadius, this.circles[i].handleRadius ) ) continue;
                     this.draggedHandle = this.circles[i];
                     this.draggedHandle.recalculateHandlePosition(
                         e,
