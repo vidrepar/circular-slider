@@ -53,15 +53,13 @@ Dialer = {
 
         events = Object.assign(Object.create(dialer), Events);
         events.bindEvents();
-
-        console.log( 'events: ', events );
         
         return dialer;
         
     }
 };
 
-var bazDialer = Dialer.compose(0,0,0,60,2, 'baz', 'lightblue');
+var bazDialer = Dialer.compose(0,0,0,60,3, 'baz', 'lightblue');
 var barDialer = Dialer.compose(0,0,0,60,4, 'bar', 'aquamarine');
 var fooDialer = Dialer.compose(0,0,0,80,5, 'foo', 'lightgreen');
 var anotherDialer = Dialer.compose(0,0,0,40,3, 'another', 'lightyellow');

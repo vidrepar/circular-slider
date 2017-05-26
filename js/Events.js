@@ -1,25 +1,33 @@
 var Events = {
     draggedHandle: null,
-    initialCircleRadius: null,
     handleEvent: function (e) {
         
         switch (e.type) {
             case 'mousedown':
                 e.preventDefault();
-
+                
                 for( var i=0;i<this.circles.length;i++ ){
 
                     if ( !this.circles[i].isInsideHitArea(e) ) continue;
                     this.draggedHandle = this.circles[i];
-                    this.draggedHandle.recalculateHandlePosition(e);
+                    this.draggedHandle.recalculateHandlePosition(
+                        e,
+                        this.circles[i].getCircleCenter(this.circles[i].circleEl).x + this.circles[i].circleRadius,
+                        this.circles[i].getCircleCenter(this.circles[i].circleEl).y + this.circles[i].circleRadius - this.draggedHandle.containerEl.getBoundingClientRect().top - window.pageYOffset
+                    );
                     this.container.containerEl.addEventListener('mousemove', this, false);
                     this.container.containerEl.addEventListener('mouseup', this, false);
+
                 }
 
                 break;
             case 'mousemove':
                 e.preventDefault();
-                this.draggedHandle.recalculateHandlePosition(e);
+                this.draggedHandle.recalculateHandlePosition(
+                    e,
+                    this.draggedHandle.getCircleCenter(this.draggedHandle.circleEl).x + this.draggedHandle.circleRadius,
+                    this.draggedHandle.getCircleCenter(this.draggedHandle.circleEl).y + this.draggedHandle.circleRadius - this.draggedHandle.containerEl.getBoundingClientRect().top - window.pageYOffset
+                );
                 break;
             case 'mouseup':
             case 'mouseleave':
@@ -44,7 +52,10 @@ var Events = {
                         j,
                         this.circles[j].handleEl
                     );
-                    this.circles[j].positionHandle(this.circles[j].handleEl);
+                    this.circles[j].positionHandle(
+                        this.circles[j].handleEl,
+                        this.circles[j].circleBorderThickness
+                    );
 
                 }
         }

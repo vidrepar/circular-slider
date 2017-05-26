@@ -6,7 +6,6 @@
 
 var Circle = Container.create({
 
-    circleEl: null,
     circleX: 50,
     circleY: 200,
     circleCenterX: null,
@@ -32,17 +31,17 @@ var Circle = Container.create({
     getCircleCenter: function ( el ) {
         var box = el.getBoundingClientRect();
         return {
-            y: box.top + pageYOffset,
-            x: box.left + pageXOffset
+            y: box.top + window.pageYOffset,
+            x: box.left + window.pageXOffset
         };
     },
-    isInsideHitArea: function ( e ) {
+    isInsideHitArea: function ( e, circleY, circleX ) {
 
         this.circleCenterX = this.getCircleCenter(this.circleEl).x + this.circleRadius;
         this.circleCenterY = this.getCircleCenter(this.circleEl).y + this.circleRadius;
 
         // This works
-        /*console.log( 'isInside', ( Math.sqrt( Math.pow( this.circleCenterX - e.pageX, 2 ) + Math.pow( this.circleCenterY - e.pageY, 2 ) ) < this.circleRadius && Math.sqrt( Math.pow( this.circleCenterX - e.pageX, 2 ) + Math.pow( this.circleCenterY - e.pageY, 2 ) ) + this.handleRadius > this.circleRadius
+        /*console.log( 'isInside', ( Math.sqrt( Math.pow( circleX - e.pageX, 2 ) + Math.pow( circleY - e.pageY, 2 ) ) < this.circleRadius && Math.sqrt( Math.pow( circleX - e.pageX, 2 ) + Math.pow( circleY - e.pageY, 2 ) ) + this.handleRadius > this.circleRadius
         ) );*/
         
         return ( Math.sqrt( Math.pow( this.circleCenterX - e.pageX, 2 ) + Math.pow( this.circleCenterY - e.pageY, 2 ) ) < this.circleRadius && Math.sqrt( Math.pow( this.circleCenterX - e.pageX, 2 ) + Math.pow( this.circleCenterY - e.pageY, 2 ) ) + this.handleRadius > this.circleRadius
