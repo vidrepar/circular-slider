@@ -4,7 +4,12 @@ body {
     overflow-y: scroll;
 }
 
+.main-container {
+    text-align: center;
+}
+
 .data-container, .dialer-container {
+    display: inline-block;
     height: inherit;
-    width: 50%;
+    min-width: 400px;
 }

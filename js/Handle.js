@@ -43,20 +43,21 @@ var Handle = {
         if ( !e ) return Math.PI*1.5;
 
         var r = this.containerEl.getBoundingClientRect(),
-            mX = e.clientX - r.left,
+            mX = e.clientX,
             mY = e.clientY - r.top,
             dX = mX - circleX,
             dY = mY - circleY;
 
+        console.log( 'r: ', r );
+
         this.handleAngle = Math.atan2(dY, dX); // For dynamic positioning during resizing; refactor in the future;
         return Math.atan2(dY, dX);
     },
-    recalculateHandlePosition: function ( e, circleX, circleY, handleRadius, handleEl, circleRadius ) {
-
+    recalculateHandlePosition: function ( e, circleX, circleY, handleRadius, handleEl, circleRadius, containerLeftMargin ) {
         this.designHandle(
             handleEl,
             this.setHandlePosition(
-                circleX,
+                circleX-containerLeftMargin,
                 circleY,
                 circleRadius,
                 handleRadius,
@@ -64,7 +65,5 @@ var Handle = {
             ),
             handleRadius
         );
-
     }
-
 };

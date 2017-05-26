@@ -8,18 +8,26 @@ var Events = {
                 
                 for( var i=0;i<this.circles.length;i++ ){
 
-                    if ( !this.circles[i].isInsideHitArea( e, this.circles[i].circleEl, this.circles[i].circleRadius, this.circles[i].handleRadius ) ) continue;
+                    if ( !this.circles[i].isInsideHitArea(
+                        e,
+                        this.circles[i].circleEl,
+                        this.circles[i].circleRadius,
+                        this.circles[i].handleRadius
+                        ) ) continue;
+
                     this.draggedHandle = this.circles[i];
                     this.draggedHandle.recalculateHandlePosition(
                         e,
-                        this.draggedHandle.getCircleCenter(this.draggedHandle.circleEl).x + this.draggedHandle.circleRadius,
+                        this.draggedHandle
+                            .getCircleCenter( this.draggedHandle.circleEl).x + this.draggedHandle.circleRadius,
                             this.draggedHandle.getCircleCenter( this.draggedHandle.circleEl).y +
                             this.draggedHandle.circleRadius -
                             this.draggedHandle.containerEl.getBoundingClientRect().top -
                             window.pageYOffset,
                         this.draggedHandle.setHandleRadius(this.draggedHandle.circleBorderThickness),
                         this.draggedHandle.handleEl,
-                        this.draggedHandle.circleRadius
+                        this.draggedHandle.circleRadius,
+                        this.draggedHandle.containerEl.getBoundingClientRect().left
                     );
                     this.container.containerEl.addEventListener('mousemove', this, false);
                     this.container.containerEl.addEventListener('mouseup', this, false);
@@ -30,14 +38,16 @@ var Events = {
                 e.preventDefault();
                 this.draggedHandle.recalculateHandlePosition(
                     e,
-                    this.draggedHandle.getCircleCenter( this.draggedHandle.circleEl).x + this.draggedHandle.circleRadius,
-                        this.draggedHandle.getCircleCenter( this.draggedHandle.circleEl).y +
-                        this.draggedHandle.circleRadius -
-                        this.draggedHandle.containerEl.getBoundingClientRect().top -
-                        window.pageYOffset,
+                    this.draggedHandle
+                        .getCircleCenter( this.draggedHandle.circleEl).x + this.draggedHandle.circleRadius,
+                    this.draggedHandle.getCircleCenter( this.draggedHandle.circleEl).y +
+                    this.draggedHandle.circleRadius -
+                    this.draggedHandle.containerEl.getBoundingClientRect().top -
+                    window.pageYOffset,
                     this.draggedHandle.setHandleRadius(this.draggedHandle.circleBorderThickness),
                     this.draggedHandle.handleEl,
-                    this.draggedHandle.circleRadius
+                    this.draggedHandle.circleRadius,
+                    this.draggedHandle.containerEl.getBoundingClientRect().left
                 );
                 break;
             case 'mouseup':
