@@ -18,12 +18,14 @@ Dialer = {
 
         for ( var i=0;i<categoriesNum;i++ ) {
 
-            circles.push(Object.assign( Object.create(container), Circle, Handle, {
+            circles.push(Object.assign( Object.create(container), Circle, Trace, Handle, {
                 // Options
                 circleBorderThickness: 30,
                 circleRadius: radius,
                 circleX: 50,
-                handleAngle: Math.PI*2
+                handleAngle: Math.PI*2,
+                startAngle: Math.PI*2,
+                endAngle: Math.PI*2
             }));
             circles[i].handleEl = circles[i].createHandle( document.createElement('div'), i, containerName );
             circles[i].handleRadius = circles[i].setHandleRadius( circles[i].circleBorderThickness );
@@ -52,6 +54,14 @@ Dialer = {
 
             circles[j].circleEl.style.top = circles[j].circleCenter.y + 'px'; // Move to Circle class
             circles[j].circleEl.style.left = 'calc('+ circles[j].circleX +'% - '+ circles[j].circleRadius +'px)';
+
+            circles[j].renderTrace(
+                document.createElementNS("http://www.w3.org/2000/svg", "svg"),
+                document.createElementNS("http://www.w3.org/2000/svg", "path"),
+                container.containerEl,
+                j,
+                containerName
+            );
 
             circles[j].renderHandle(
                 circles[j].containerEl.getBoundingClientRect().width/2,

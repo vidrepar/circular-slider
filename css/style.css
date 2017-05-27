@@ -12,4 +12,6 @@ body {
     display: inline-block;
     height: inherit;
     min-width: 400px;
+    min-height: 250px;
+    background-color: aquamarine;
 }

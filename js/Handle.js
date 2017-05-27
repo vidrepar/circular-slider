@@ -21,7 +21,8 @@ var Handle = {
         handleEl.style.width = handleRadius+'px';
         handleEl.style.position = 'absolute';
         handleEl.style.borderRadius = '50%';
-        handleEl.style.backgroundColor = 'red';
+        handleEl.style.backgroundColor = '#fff';
+        handleEl.style.boxShadow = '1px #000';
         handleEl.style.zIndex = 2;
         this.positionHandle( handleEl, handlePosition, handleRadius );
     },
@@ -47,8 +48,6 @@ var Handle = {
             mY = e.clientY - r.top,
             dX = mX - circleX,
             dY = mY - circleY;
-
-        console.log( 'r: ', r );
 
         this.handleAngle = Math.atan2(dY, dX); // For dynamic positioning during resizing; refactor in the future;
         return Math.atan2(dY, dX);
