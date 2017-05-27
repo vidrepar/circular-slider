@@ -29,6 +29,13 @@ var Events = {
                         this.draggedHandle.circleRadius,
                         this.draggedHandle.containerEl.getBoundingClientRect().left
                     );
+                    this.draggedHandle.setTraceAngle(
+                        this.draggedHandle.handleAngle,
+                        this.draggedHandle.traceEl,
+                        this.draggedHandle.containerEl.getBoundingClientRect().width/2,
+                        this.draggedHandle.circleCenter.y + this.draggedHandle.circleRadius,
+                        this.draggedHandle.circleRadius - this.draggedHandle.handleRadius/2
+                    );
                     this.container.containerEl.addEventListener('mousemove', this, false);
                     this.container.containerEl.addEventListener('mouseup', this, false);
                 }
@@ -48,6 +55,13 @@ var Events = {
                     this.draggedHandle.handleEl,
                     this.draggedHandle.circleRadius,
                     this.draggedHandle.containerEl.getBoundingClientRect().left
+                );
+                this.draggedHandle.setTraceAngle(
+                    this.draggedHandle.handleAngle,
+                    this.draggedHandle.traceEl,
+                    this.draggedHandle.containerEl.getBoundingClientRect().width/2,
+                    this.draggedHandle.circleCenter.y + this.draggedHandle.circleRadius,
+                    this.draggedHandle.circleRadius - this.draggedHandle.handleRadius/2
                 );
                 break;
             case 'mouseup':

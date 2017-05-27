@@ -7,7 +7,7 @@ var Circle = {
         circleEl.style.width = circleRadius*2 + 'px';
         circleEl.style.position = 'absolute';
         circleEl.style.borderRadius = '50%';
-        circleEl.style.border = circleBorderThickness+'px solid blue';
+        circleEl.style.border = circleBorderThickness+'px dotted blue';
         circleEl.style.boxSizing = 'border-box';
         circleEl.style.zIndex = 1;
         containerEl.appendChild( circleEl );

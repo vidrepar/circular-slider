@@ -32,6 +32,7 @@ Dialer = {
             circles[i].handleAngle = circles[i].setHandleAngle();
             circles[i].circleRadius = radius+i*(circles[i].circleBorderThickness+2);
             circles[i].circleEl = circles[i].createCircle( document.createElement('div'), i, containerName );
+            circles[i].traceEl = circles[i].createTrace( document.createElementNS("http://www.w3.org/2000/svg", "path"), i, containerName );
 
             if ( circles[categoriesNum-1] )
                 container.containerHeight = circles[categoriesNum-1].circleRadius*2 + circles[i].circleBorderThickness*2,
@@ -57,10 +58,14 @@ Dialer = {
 
             circles[j].renderTrace(
                 document.createElementNS("http://www.w3.org/2000/svg", "svg"),
-                document.createElementNS("http://www.w3.org/2000/svg", "path"),
+                circles[j].traceEl,
                 container.containerEl,
                 j,
-                containerName
+                containerName,
+                circles[j].containerEl.getBoundingClientRect().width/2,
+                circles[j].circleCenter.y + circles[j].circleRadius,
+                circles[j].circleRadius - circles[j].handleRadius/2,
+                circles[j].circleBorderThickness
             );
 
             circles[j].renderHandle(
@@ -86,5 +91,5 @@ Dialer = {
 
 var bazDialer = Dialer.compose(0,0,0,60,3, 'baz', 'lightblue');
 var barDialer = Dialer.compose(0,0,0,60,4, 'bar', 'aquamarine');
-var fooDialer = Dialer.compose(0,0,0,80,5, 'foo', 'lightgreen');
+var fooDialer = Dialer.compose(0,0,0,80,4, 'foo', 'lightgreen');
 var anotherDialer = Dialer.compose(0,0,0,40,3, 'another', 'lightyellow');

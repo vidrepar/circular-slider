@@ -23,7 +23,7 @@ var Handle = {
         handleEl.style.borderRadius = '50%';
         handleEl.style.backgroundColor = '#fff';
         handleEl.style.boxShadow = '1px #000';
-        handleEl.style.zIndex = 2;
+        handleEl.style.zIndex = 3;
         this.positionHandle( handleEl, handlePosition, handleRadius );
     },
     positionHandle: function ( handleEl, handlePosition, handleRadius ) {
@@ -41,7 +41,7 @@ var Handle = {
     },
     setHandleAngle: function ( e, circleX, circleY ) {
 
-        if ( !e ) return Math.PI*1.5;
+        if ( !e ) return -Math.PI/2;
 
         var r = this.containerEl.getBoundingClientRect(),
             mX = e.clientX,
