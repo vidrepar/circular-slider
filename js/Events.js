@@ -3,6 +3,7 @@ var Events = {
     handleEvent: function (e) {
 
         switch (e.type) {
+            case 'touchstart':
             case 'mousedown':
                 e.preventDefault();
                 
@@ -37,11 +38,22 @@ var Events = {
                         this.draggedHandle.circleCenter.y + this.draggedHandle.circleRadius,
                         this.draggedHandle.circleRadius - this.draggedHandle.handleRadius/2
                     );
+                    this.draggedHandle.angleToMoney(
+                        this.draggedHandle.handleAngle,
+                        this.draggedHandle.valueEl,
+                        this.draggedHandle.minValue,
+                        this.draggedHandle.maxValue,
+                        this.draggedHandle.step
+                    );
                     this.container.containerEl.addEventListener('mousemove', this, false);
                     this.container.containerEl.addEventListener('mouseup', this, false);
+                    this.container.containerEl.addEventListener('touchmove', this, false);
+                    this.container.containerEl.addEventListener('touchend', this, false);
+                    this.container.containerEl.addEventListener('touchcancel', this, false);
                 }
 
                 break;
+            case 'touchmove':
             case 'mousemove':
                 e.preventDefault();
                 this.draggedHandle.recalculateHandlePosition(
@@ -65,12 +77,24 @@ var Events = {
                     this.draggedHandle.circleCenter.y + this.draggedHandle.circleRadius,
                     this.draggedHandle.circleRadius - this.draggedHandle.handleRadius/2
                 );
+                this.draggedHandle.angleToMoney(
+                    this.draggedHandle.handleAngle,
+                    this.draggedHandle.valueEl,
+                    this.draggedHandle.minValue,
+                    this.draggedHandle.maxValue,
+                    this.draggedHandle.step
+                );
                 break;
+            case 'touchend':
+            case 'touchcancel':
             case 'mouseup':
             case 'mouseleave':
                 e.preventDefault();
                 this.container.containerEl.removeEventListener('mousemove', this, false);
                 this.container.containerEl.removeEventListener('mouseup', this, false);
+                this.container.containerEl.removeEventListener('touchmove', this, false);
+                this.container.containerEl.removeEventListener('touchend', this, false);
+                this.container.containerEl.removeEventListener('touchcancel', this, false);
                 this.draggedHandle = null;
                 break;
             case 'resize':

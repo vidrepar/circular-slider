@@ -1,7 +1,7 @@
 
 Dialer = {
 
-    compose: function ( min, max, step, radius, categoriesNum, containerName, color, categories ) {
+    compose: function ( min, max, step, radius, containerName, color, categories ) {
 
         var container,
             circles = [],
@@ -25,7 +25,10 @@ Dialer = {
                 circleX: 50,
                 handleAngle: Math.PI*2,
                 color: color,
-                dataContainer: document.getElementById('data-container_'+containerName)
+                dataContainer: document.getElementById('data-container_'+containerName),
+                minValue: min,
+                maxValue: max,
+                step: step
             }));
 
             var c = circles[i];
@@ -34,8 +37,8 @@ Dialer = {
             c.traceEl = c.createTrace( document.createElementNS("http://www.w3.org/2000/svg", "path"), i, containerName );
             c.handleEl = c.createHandle( document.createElement('div'), i, containerName );
             c.valueElContainer = c.createValueContainer( document.createElement('div'), i, containerName, categories[i] );
-            c.valueElSymbolContainer = c.createValueSymbol( document.createElement('div'), document.createElement('div'), i, containerName ).valueSymbolContainer;
-            c.valueElSymbol = c.createValueSymbol( document.createElement('div'), document.createElement('div'), i, containerName ).valueSymbol;
+            c.valueElSymbolContainer = c.createValueSymbol( document.createElement('div'), document.createElement('div'), i, containerName, color ).valueSymbolContainer;
+            c.valueElSymbol = c.createValueSymbol( document.createElement('div'), document.createElement('div'), i, containerName, color ).valueSymbol;
             c.valueElName = c.createValueName( document.createElement('div'), categories[i] );
             c.valueEl = c.createValue( document.createElement('div'), c.handleAngle );
 
@@ -45,7 +48,7 @@ Dialer = {
 
             if ( circles[categories.length-1] )
                 container.containerHeight = circles[categories.length-1].circleRadius*2 + c.circleBorderThickness*2,
-                container.containerEl.style.height = container.containerHeight+'px'
+                container.containerEl.style.height = container.containerHeight+'px',
                 document.getElementById('data-container_'+containerName).style.height = container.containerHeight+'px'
                 ;
         }
@@ -54,7 +57,18 @@ Dialer = {
 
             var c = circles[j];
 
-            c.renderValue( c.dataContainer, c.valueElContainer, c.valueElSymbolContainer, c.valueElSymbol, c.valueElName, c.valueEl );
+            c.renderValue(
+                c.dataContainer,
+                c.valueElContainer,
+                c.valueElSymbolContainer,
+                c.valueElSymbol,
+                c.valueElName,
+                c.valueEl,
+                c.handleAngle,
+                c.minValue,
+                c.maxValue,
+                c.step
+            );
 
             c.circleCenter = {
                 x: c.getCircleCenter(c.circleEl).x + c.circleRadius,
@@ -102,14 +116,12 @@ Dialer = {
         events = Object.assign(Object.create(dialer), Events);
         events.bindEvents();
         
-        console.log( 'dialer: ', dialer.circles[0] );
-        
         return dialer;
         
     }
 };
 
-var bazDialer = Dialer.compose(0,0,0,60,3, 'baz', [195, 53, 79, 1], ['Shopping', 'Music']);
-var barDialer = Dialer.compose(0,0,0,60,4, 'bar', [160, 100, 75, 1], ['Shopping', 'Entertainment', 'Electronics', 'Transport']);
-var fooDialer = Dialer.compose(0,0,0,70,4, 'foo', [120, 93, 79, 1], ['Shopping', 'Entertainment', 'Renovation', 'Transport']);
-var anotherDialer = Dialer.compose(0,0,0,40,3, 'another', [271, 68, 32, 1], ['Shopping', 'Transport']);
+Dialer.compose( 0, 1000, 20, 60, 'baz', [195, 53, 79, 1], ['Shopping', 'Music'] );
+Dialer.compose( 50, 200, 5, 60, 'bar', [160, 100, 75, 1], ['Shopping', 'Entertainment', 'Electronics', 'Transport'] );
+Dialer.compose( 280, 850, 17, 70, 'foo', [120, 93, 79, 1], ['Shopping', 'Entertainment', 'Renovation', 'Transport'] );
+Dialer.compose( 15, 45, 2.5, 40, 'another', [271, 68, 32, 1], ['Shopping', 'Transport'] );
