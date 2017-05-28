@@ -1,17 +1,32 @@
+
 body {
     margin: 0;
     position: relative;
     overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+h1 {
+    text-align: center;
+    line-height: 3;
+    font-family: 'Kaushan Script', cursive;
+    font-size: 3em;
 }
 
 .main-container {
     text-align: center;
+    margin: 15px 15px;
 }
 
 .data-container, .dialer-container {
     display: inline-block;
-    height: inherit;
-    min-width: 400px;
-    min-height: 250px;
-    background-color: aquamarine;
+    min-width: 340px;
+}
+
+@media screen
+and (min-width: 750px) {
+    .data-container {
+        min-width: 400px;
+        margin-left: 20px;
+    }
 }

@@ -9,11 +9,12 @@ var Trace = {
         circleX,
         circleY,
         circleRadius,
-        circleBorderThickness
+        circleBorderThickness,
+        color
     ) {
 
         this.appendTraceContainer( traceContainer, traceEl, containerEl, containerName, i );
-        this.designTrace( traceEl, i, containerName, circleX, circleY, circleRadius, circleBorderThickness );
+        this.designTrace( traceEl, i, containerName, circleX, circleY, circleRadius, circleBorderThickness, -Math.PI/2, color );
     },
     createTrace: function ( traceEl, i, containerName ) {
         traceEl['id'] = 'trace_'+containerName+'_'+i;
@@ -24,7 +25,7 @@ var Trace = {
         containerEl.appendChild( traceContainer );
         traceContainer.appendChild( traceEl );
     },
-    designTraceContainer: function ( traceContainer, containerName, i ) {
+    designTraceContainer: function ( traceContainer, traceEl, containerName, i ) {
 
         traceContainer['id'] = 'trace_container_'+containerName+'_'+i;
         traceContainer.style.position = 'absolute';
@@ -33,11 +34,11 @@ var Trace = {
         traceContainer.setAttribute('width', '500px'); // Refactor
         traceContainer.setAttribute('height', '500px'); // Refactor
     },
-    designTrace: function ( traceEl, i, containerName, circleX, circleY, circleRadius, circleBorderThickness, handleAngle ) {
+    designTrace: function ( traceEl, i, containerName, circleX, circleY, circleRadius, circleBorderThickness, handleAngle, color ) {
         traceEl['id'] = 'trace_'+containerName+'_'+i;
         traceEl.style.zIndex = '3';
         traceEl.setAttribute('fill', 'none');
-        traceEl.setAttribute('stroke', '#446688');
+        traceEl.setAttribute('stroke', 'hsla('+color[0]+', '+color[1]+'%, '+color[2]+'%, 1)');
         traceEl.setAttribute('stroke-width', circleBorderThickness+'px');
         this.setTraceAngle( handleAngle, traceEl, circleX, circleY, circleRadius );
         return traceEl;

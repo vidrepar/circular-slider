@@ -1,12 +1,14 @@
 
 var Handle = {
 
-    renderHandle: function ( circleX, circleY, circleRadius, handleRadius, handleAngle, circleBorderThickness, i, handleEl, containerEl ) {
+    renderHandle: function ( circleX, circleY, circleRadius, handleRadius, handleAngle, circleBorderThickness, i, handleEl, containerEl, color ) {
 
         this.designHandle(
             handleEl,
             this.setHandlePosition( circleX, circleY, circleRadius, handleRadius, handleAngle ),
-            handleRadius
+            handleRadius,
+            color,
+            i
         );
         containerEl.appendChild( handleEl );
 
@@ -15,13 +17,15 @@ var Handle = {
         el['id'] = 'handle_'+containerName+'_'+i;
         return el;
     },
-    designHandle: function ( handleEl, handlePosition, handleRadius ) {
+    designHandle: function ( handleEl, handlePosition, handleRadius, color, i ) {
 
         handleEl.style.height = handleRadius+'px';
         handleEl.style.width = handleRadius+'px';
         handleEl.style.position = 'absolute';
         handleEl.style.borderRadius = '50%';
-        handleEl.style.backgroundColor = '#fff';
+        handleEl.style.backgroundColor = 'hsla('+color[0]/(1+i*2.7)+', '+color[1]+'%, '+color[2]+'%, 1)';
+        handleEl.style.border = '8px solid #fff';
+        handleEl.style.boxSizing = 'border-box';
         handleEl.style.boxShadow = '1px #000';
         handleEl.style.zIndex = 3;
         this.positionHandle( handleEl, handlePosition, handleRadius );
@@ -52,7 +56,7 @@ var Handle = {
         this.handleAngle = Math.atan2(dY, dX); // For dynamic positioning during resizing; refactor in the future;
         return Math.atan2(dY, dX);
     },
-    recalculateHandlePosition: function ( e, circleX, circleY, handleRadius, handleEl, circleRadius, containerLeftMargin ) {
+    recalculateHandlePosition: function ( e, circleX, circleY, handleRadius, handleEl, circleRadius, containerLeftMargin, color ) {
         this.designHandle(
             handleEl,
             this.setHandlePosition(
@@ -62,7 +66,8 @@ var Handle = {
                 handleRadius,
                 this.setHandleAngle( e, circleX, circleY )
             ),
-            handleRadius
+            handleRadius,
+            color
         );
     }
 };

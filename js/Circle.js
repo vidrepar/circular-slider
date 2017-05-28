@@ -1,13 +1,13 @@
 
 var Circle = {
 
-    renderCircle: function ( circleRadius, containerEl, circleEl, circleBorderThickness ) {
+    renderCircle: function ( circleRadius, containerEl, circleEl, circleBorderThickness, color ) {
 
         circleEl.style.height = circleRadius*2 + 'px';
         circleEl.style.width = circleRadius*2 + 'px';
         circleEl.style.position = 'absolute';
         circleEl.style.borderRadius = '50%';
-        circleEl.style.border = circleBorderThickness+'px dotted blue';
+        circleEl.style.border = circleBorderThickness+'px solid '+ 'hsla('+color[0]+', '+color[1]+'%, '+color[2]+'%, 0.4)';
         circleEl.style.boxSizing = 'border-box';
         circleEl.style.zIndex = 1;
         containerEl.appendChild( circleEl );

@@ -27,7 +27,8 @@ var Events = {
                         this.draggedHandle.setHandleRadius(this.draggedHandle.circleBorderThickness),
                         this.draggedHandle.handleEl,
                         this.draggedHandle.circleRadius,
-                        this.draggedHandle.containerEl.getBoundingClientRect().left
+                        this.draggedHandle.containerEl.getBoundingClientRect().left,
+                        this.draggedHandle.color
                     );
                     this.draggedHandle.setTraceAngle(
                         this.draggedHandle.handleAngle,
@@ -54,7 +55,8 @@ var Events = {
                     this.draggedHandle.setHandleRadius(this.draggedHandle.circleBorderThickness),
                     this.draggedHandle.handleEl,
                     this.draggedHandle.circleRadius,
-                    this.draggedHandle.containerEl.getBoundingClientRect().left
+                    this.draggedHandle.containerEl.getBoundingClientRect().left,
+                    this.draggedHandle.color
                 );
                 this.draggedHandle.setTraceAngle(
                     this.draggedHandle.handleAngle,
