@@ -55,7 +55,6 @@ var Events = {
                     this.container.containerEl.addEventListener('mouseup', this, false);
                 }
 
-                e.preventDefault();
                 break;
             case 'touchmove':
             case 'mousemove':
