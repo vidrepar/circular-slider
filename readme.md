@@ -26,7 +26,7 @@ App is the most important directory in this repo. To run it locally, go into the
 npm i
 ```
  
- Express server just servers static files, so nothing special here. To run it:
+ Express serves static files on port 3333. To run it:
  
  ``` 
  cd circular-slider
