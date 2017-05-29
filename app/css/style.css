@@ -27,6 +27,8 @@ h1 {
     vertical-align: top;
     text-align: left;
     padding: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
     box-sizing: border-box;
@@ -71,6 +73,6 @@ h1 {
 and (min-width: 750px) {
     .data-container {
         min-width: 400px;
-        margin-left: 20px;
+        margin: 0 0 0 20px;
     }
 }

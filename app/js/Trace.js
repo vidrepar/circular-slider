@@ -10,34 +10,35 @@ var Trace = {
         circleY,
         circleRadius,
         circleBorderThickness,
-        color
+        color,
+        containerHeight
     ) {
 
-        this.appendTraceContainer( traceContainer, traceEl, containerEl, containerName, i );
+        this.appendTraceContainer( traceContainer, traceEl, containerEl, containerName, i, containerHeight );
         this.designTrace( traceEl, i, containerName, circleX, circleY, circleRadius, circleBorderThickness, -Math.PI/2, color );
     },
     createTrace: function ( traceEl, i, containerName ) {
         traceEl['id'] = 'trace_'+containerName+'_'+i;
         return traceEl;
     },
-    appendTraceContainer: function ( traceContainer, traceEl, containerEl, containerName, i ) {
-        this.designTraceContainer( traceContainer, traceEl, containerName, i );
+    appendTraceContainer: function ( traceContainer, traceEl, containerEl, containerName, i, containerHeight ) {
+        this.designTraceContainer( traceContainer, traceEl, containerName, i, containerHeight );
         containerEl.appendChild( traceContainer );
         traceContainer.appendChild( traceEl );
     },
-    designTraceContainer: function ( traceContainer, traceEl, containerName, i ) {
-
+    designTraceContainer: function ( traceContainer, traceEl, containerName, i, containerHeight ) {
         traceContainer['id'] = 'trace_container_'+containerName+'_'+i;
         traceContainer.style.position = 'absolute';
         traceContainer.style.zIndex = '2';
         traceContainer.style.left = '0';
-        traceContainer.setAttribute('width', '500px'); // Refactor
-        traceContainer.setAttribute('height', '500px'); // Refactor
+        traceContainer.setAttribute('width', '340'); // Refactor
+        traceContainer.setAttribute('height', containerHeight); // Refactor
     },
     designTrace: function ( traceEl, i, containerName, circleX, circleY, circleRadius, circleBorderThickness, handleAngle, color ) {
         traceEl['id'] = 'trace_'+containerName+'_'+i;
         traceEl.style.zIndex = '3';
         traceEl.setAttribute('fill', 'none');
+        traceEl.style.top = '-30px';
         traceEl.setAttribute('stroke', 'hsla('+color[0]+', '+color[1]+'%, '+color[2]+'%, 1)');
         traceEl.setAttribute('stroke-width', circleBorderThickness+'px');
         this.setTraceAngle( handleAngle, traceEl, circleX, circleY, circleRadius );

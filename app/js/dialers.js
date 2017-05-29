@@ -47,7 +47,7 @@ Dialer = {
             c.circleRadius = radius+i*(c.circleBorderThickness+2);
 
             if ( circles[categories.length-1] )
-                container.containerHeight = circles[categories.length-1].circleRadius*2 + c.circleBorderThickness*2,
+                container.containerHeight = circles[categories.length-1].circleRadius*2,
                 container.containerEl.style.height = container.containerHeight+'px',
                 document.getElementById('data-container_'+containerName).style.height = container.containerHeight+'px'
                 ;
@@ -96,7 +96,8 @@ Dialer = {
                 c.circleCenter.y + c.circleRadius,
                 c.circleRadius - c.handleRadius/2,
                 c.circleBorderThickness,
-                color
+                color,
+                c.containerHeight
             );
 
             c.renderHandle(
