@@ -23,7 +23,7 @@ var Events = {
                     this.draggedHandle.recalculateHandlePosition(
                         event,
                         this.draggedHandle
-                            .getCircleCenter( this.draggedHandle.circleEl).x + this.draggedHandle.circleRadius,
+                            .getCircleCenter( this.draggedHandle.circleEl).x + this.draggedHandle.circleRadius - pageXOffset,
                             this.draggedHandle.getCircleCenter( this.draggedHandle.circleEl).y +
                             this.draggedHandle.circleRadius -
                             this.draggedHandle.containerEl.getBoundingClientRect().top -
@@ -62,8 +62,7 @@ var Events = {
 
                 this.draggedHandle.recalculateHandlePosition(
                     event,
-                    this.draggedHandle
-                        .getCircleCenter( this.draggedHandle.circleEl).x + this.draggedHandle.circleRadius,
+                    this.draggedHandle.getCircleCenter( this.draggedHandle.circleEl).x + this.draggedHandle.circleRadius - pageXOffset,
                     this.draggedHandle.getCircleCenter( this.draggedHandle.circleEl).y +
                     this.draggedHandle.circleRadius -
                     this.draggedHandle.containerEl.getBoundingClientRect().top -

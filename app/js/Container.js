@@ -1,6 +1,6 @@
 
 
-var Container = App.create({
+var Container = {
 
     renderContainer: function ( containerEl, containerName, color ) {
         this.createMainContainer( containerEl, this.createDataContainer( color, containerName ), containerName );
@@ -35,4 +35,4 @@ var Container = App.create({
         refNode.parentNode.insertBefore( newNode, refNode.nextSibling );
     }
 
-});
+};
