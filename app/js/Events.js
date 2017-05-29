@@ -2,15 +2,18 @@ var Events = {
     draggedHandle: null,
     handleEvent: function (e) {
 
+        var event = e;
+        if ( e.type === 'touchstart' ||
+             e.type === 'touchmove' ) event = event.targetTouches[0];
+
         switch (e.type) {
             case 'touchstart':
             case 'mousedown':
-                e.preventDefault();
                 
                 for( var i=0;i<this.circles.length;i++ ){
 
                     if ( !this.circles[i].isInsideHitArea(
-                        e,
+                        event,
                         this.circles[i].circleEl,
                         this.circles[i].circleRadius,
                         this.circles[i].handleRadius
@@ -18,7 +21,7 @@ var Events = {
 
                     this.draggedHandle = this.circles[i];
                     this.draggedHandle.recalculateHandlePosition(
-                        e,
+                        event,
                         this.draggedHandle
                             .getCircleCenter( this.draggedHandle.circleEl).x + this.draggedHandle.circleRadius,
                             this.draggedHandle.getCircleCenter( this.draggedHandle.circleEl).y +
@@ -45,19 +48,20 @@ var Events = {
                         this.draggedHandle.maxValue,
                         this.draggedHandle.step
                     );
-                    this.container.containerEl.addEventListener('mousemove', this, false);
-                    this.container.containerEl.addEventListener('mouseup', this, false);
                     this.container.containerEl.addEventListener('touchmove', this, false);
                     this.container.containerEl.addEventListener('touchend', this, false);
                     this.container.containerEl.addEventListener('touchcancel', this, false);
+                    this.container.containerEl.addEventListener('mousemove', this, false);
+                    this.container.containerEl.addEventListener('mouseup', this, false);
                 }
 
+                e.preventDefault();
                 break;
             case 'touchmove':
             case 'mousemove':
-                e.preventDefault();
+
                 this.draggedHandle.recalculateHandlePosition(
-                    e,
+                    event,
                     this.draggedHandle
                         .getCircleCenter( this.draggedHandle.circleEl).x + this.draggedHandle.circleRadius,
                     this.draggedHandle.getCircleCenter( this.draggedHandle.circleEl).y +
@@ -84,6 +88,7 @@ var Events = {
                     this.draggedHandle.maxValue,
                     this.draggedHandle.step
                 );
+                e.preventDefault();
                 break;
             case 'touchend':
             case 'touchcancel':
@@ -116,6 +121,7 @@ var Events = {
         }
     },
     bindEvents: function () {
+        this.container.containerEl.addEventListener('touchstart', this, false);
         this.container.containerEl.addEventListener('mousedown', this, false);
         this.container.containerEl.addEventListener('mouseleave', this, false);
         window.addEventListener('resize', this, false);
