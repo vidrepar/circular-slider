@@ -1,5 +1,5 @@
 
-Dialer = {
+SliderGroup = {
 
     compose: function ( min, max, step, radius, containerName, color, categories ) {
 
@@ -11,7 +11,7 @@ Dialer = {
         container.containerEl = container.createContainer(document.createElement('div'), containerName);
         container.renderContainer( container.containerEl, containerName, color );
 
-        var dialer = {
+        var sliderGroup = {
             container: container,
             circles: circles
         };
@@ -114,15 +114,15 @@ Dialer = {
             );
         }
 
-        events = Object.assign(Object.create(dialer), Events);
+        events = Object.assign(Object.create(sliderGroup), Events);
         events.bindEvents();
         
-        return dialer;
+        return sliderGroup;
         
     }
 };
 
-Dialer.compose( 0, 1000, 20, 60, 'baz', [195, 53, 79, 1], ['Shopping', 'Music'] );
-Dialer.compose( 50, 200, 5, 60, 'bar', [160, 100, 75, 1], ['Shopping', 'Entertainment', 'Electronics', 'Transport'] );
-Dialer.compose( 280, 850, 17, 70, 'foo', [120, 93, 79, 1], ['Shopping', 'Entertainment', 'Renovation', 'Transport'] );
-Dialer.compose( 15, 45, 2.5, 40, 'another', [271, 68, 32, 1], ['Shopping', 'Transport'] );
+SliderGroup.compose( 0, 1000, 20, 60, 'baz', [195, 53, 79, 1], ['Shopping', 'Music'] );
+SliderGroup.compose( 50, 200, 5, 60, 'bar', [160, 100, 75, 1], ['Shopping', 'Entertainment', 'Electronics', 'Transport'] );
+SliderGroup.compose( 280, 850, 17, 70, 'foo', [120, 93, 79, 1], ['Shopping', 'Entertainment', 'Renovation', 'Transport'] );
+SliderGroup.compose( 15, 45, 2.5, 40, 'another', [271, 68, 32, 1], ['Shopping', 'Transport'] );
