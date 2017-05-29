@@ -15,6 +15,8 @@
 
 App is the most important directory in this repo. To run it locally, go into the app directory and install gulp dependencies. You'll get serve ( also live reloading via browser-sync ) and build processes. Otherwise, no libraries are used in this project, just good old Javascript.
 
+ Regarding .js files and style of programming, Slider.js brings everything together; others consist mostly of pure functions which are being called either in Slider.js in initalization phase or in Events.js during user input.
+
  ``` 
  cd circular-slider
  ```
