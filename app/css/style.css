@@ -3,6 +3,7 @@ body {
     margin: 0;
     position: relative;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 h1 {
