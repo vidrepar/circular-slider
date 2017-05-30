@@ -6,7 +6,7 @@ var Events = {
         if ( e.type === 'touchstart' ||
              e.type === 'touchmove' ) event = event.targetTouches[0];
 
-        switch (e.type) {
+        switch ( e.type ) {
             case 'touchstart':
             case 'mousedown':
                 
@@ -55,7 +55,8 @@ var Events = {
                     this.container.containerEl.addEventListener('mouseup', this, false);
                 }
 
-                e.preventDefault();
+                if ( null !== this.draggedHandle ) e.preventDefault();
+
                 break;
             case 'touchmove':
             case 'mousemove':

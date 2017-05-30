@@ -31,6 +31,12 @@ npm i
  Express serves static files on port 3333. To run it:
  
  ``` 
+ cd circular-slider/server
+ ```
+  ``` 
+  npm i
+  ```
+ ``` 
  cd circular-slider
  ```
  
